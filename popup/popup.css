@@ -1,0 +1,152 @@
+
+/* General popup styling */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 320px;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #101827;
+    color: white;
+}
+
+/* Main container */
+.container {
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: #4ade80;
+}
+
+header p {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+/* Protection status card */
+.status-card {
+    background-color: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.status-card h3 {
+    font-size: 15px;
+    margin: 0 0 10px;
+}
+
+.status-card p {
+    font-size: 13px;
+    color: #4ade80;
+    margin: 0;
+}
+
+/* Ads blocked counter */
+.counter-card {
+    background-color: #1e293b;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.counter-card h2 {
+    font-size: 36px;
+    color: #4ade80;
+    margin: 0;
+}
+
+.counter-card p {
+    font-size: 13px;
+    color: #cbd5e1;
+    margin-top: 5px;
+}
+
+/* Main ad blocking control */
+.control-card {
+    background-color: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-card label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ON/OFF toggle switch */
+#adToggle {
+    appearance: none;
+    width: 42px;
+    height: 22px;
+    background-color: #64748b;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+#adToggle:checked {
+    background-color: #4ade80;
+}
+
+#adToggle::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 3px;
+    left: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+#adToggle:checked::before {
+    transform: translateX(20px);
+}
+
+/* Website-specific control */
+.website-card button {
+    width: 100%;
+    padding: 12px;
+    background-color: #334155;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.website-card button:hover {
+    background-color: #475569;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer p {
+    font-size: 11px;
+    color: #9ca3af;
+}

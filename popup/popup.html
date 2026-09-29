@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AdBlocker</title>
+
+    <!-- Connect the CSS file -->
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+
+    <!-- Main popup container -->
+    <div class="container">
+
+        <!-- Extension header -->
+        <header>
+            <h1>🛡️ AdBlocker</h1>
+            <p>Your browsing protection</p>
+        </header>
+
+        <!-- Protection status -->
+        <div class="status-card">
+            <h3>Protection Status</h3>
+            <p id="statusText">Protection is ON</p>
+        </div>
+
+        <!-- Ads blocked counter -->
+        <div class="counter-card">
+            <h2 id="adsCount">0</h2>
+            <p>Ads Blocked</p>
+        </div>
+
+        <!-- Main blocking control -->
+        <div class="control-card">
+            <label for="adToggle">Ad Blocking</label>
+
+            <input
+                type="checkbox"
+                id="adToggle"
+                checked
+            >
+        </div>
+
+        <!-- Website-specific blocking control -->
+        <div class="website-card">
+            <button id="websiteToggle">
+                Disable on this website
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Browse safely. Stay protected.</p>
+        </footer>
+
+    </div>
+
+    <!-- Connect the JavaScript file -->
+    <script src="popup.js"></script>
+
+</body>
+</html>
