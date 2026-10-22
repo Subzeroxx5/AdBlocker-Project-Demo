@@ -7,7 +7,8 @@
     "permissions": [
         "storage",
         "activeTab",
-        "declarativeNetRequest"
+        "declarativeNetRequest",
+        "declarativeNetRequestFeedback"
     ],
 
     "background": {
