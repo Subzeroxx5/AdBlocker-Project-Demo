@@ -1,23 +1,26 @@
 
 /*
- * AdBlocker Popup
- * User Interface - Person 4
+ * AdBlocker - User Interface
+ * Person 4
  *
- * Handles the popup controls and displays
- * the current protection status.
+ * Saves user preferences and updates
+ * the popup interface.
  */
 
-// Get the elements from popup.html
+// Get elements from the HTML
 const adToggle = document.getElementById("adToggle");
 const statusText = document.getElementById("statusText");
 const adsCount = document.getElementById("adsCount");
 const websiteToggle = document.getElementById("websiteToggle");
 
-// Temporary UI state for testing
-let blockingEnabled = true;
-let websiteDisabled = false;
+// Load previously saved settings
+let blockingEnabled =
+    localStorage.getItem("blockingEnabled") !== "false";
 
-// Update the popup display
+let websiteDisabled =
+    localStorage.getItem("websiteDisabled") === "true";
+
+// Update the interface
 function updateUI() {
 
     // Update the protection status
@@ -42,24 +45,36 @@ function updateUI() {
     }
 }
 
-// Handle the main ON/OFF switch
+// Handle the ON/OFF switch
 adToggle.addEventListener("change", function () {
 
     blockingEnabled = adToggle.checked;
 
+    // Save the new setting
+    localStorage.setItem(
+        "blockingEnabled",
+        String(blockingEnabled)
+    );
+
     updateUI();
 });
 
-// Handle the website-specific button
+// Handle website-specific button
 websiteToggle.addEventListener("click", function () {
 
     websiteDisabled = !websiteDisabled;
 
+    // Save the new setting
+    localStorage.setItem(
+        "websiteDisabled",
+        String(websiteDisabled)
+    );
+
     updateUI();
 });
 
-// Display the initial ad counter
+// Placeholder until real ad counter is connected
 adsCount.textContent = "0";
 
-// Initialize the popup
+// Initialize the interface
 updateUI();
