@@ -74,6 +74,12 @@ header p {
     margin-top: 5px;
 }
 
+.counter-card .counter-total {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 8px;
+}
+
 /* Main ad blocking control */
 .control-card {
     background-color: #1e293b;

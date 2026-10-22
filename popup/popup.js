@@ -17,6 +17,7 @@ const statusText = document.getElementById("statusText");
 const adsCount = document.getElementById("adsCount");
 const websiteToggle = document.getElementById("websiteToggle");
 const currentWebsite = document.getElementById("currentWebsite");
+const totalBlocked = document.getElementById("totalBlocked");
 
 // Used when popup.html is opened directly (not as an extension)
 const DEMO_HOSTNAME = "example.com";
@@ -56,6 +57,7 @@ const storage = {
 let blockingEnabled = true;
 let disabledSites = [];
 let hostname = null; // null = page where blocking doesn't apply (chrome://, etc.)
+let tabId = null;    // active tab, used for the per-page ad count
 
 // Get the hostname of the active tab ("www." removed so
 // youtube.com and www.youtube.com count as one site)
@@ -69,7 +71,13 @@ async function getCurrentHostname() {
         currentWindow: true
     });
 
-    if (!tab || !tab.url) {
+    if (!tab) {
+        return null;
+    }
+
+    tabId = tab.id;
+
+    if (!tab.url) {
         return null;
     }
 
@@ -154,8 +162,32 @@ websiteToggle.addEventListener("click", function () {
     updateUI();
 });
 
-// Placeholder until real ad counter is connected
-adsCount.textContent = "0";
+// Show ads blocked on this page and in total
+// (counted by the background script)
+async function updateCounter() {
+    if (!isExtension) {
+        return;
+    }
+
+    const session = await chrome.storage.session.get({ tabCounts: {} });
+    const local = await chrome.storage.local.get({ totalBlocked: 0 });
+
+    const pageCount = tabId === null ? 0 : (session.tabCounts[tabId] || 0);
+
+    adsCount.textContent = pageCount.toLocaleString();
+    totalBlocked.textContent =
+        local.totalBlocked.toLocaleString() + " blocked in total";
+}
+
+// Keep the counter live while the popup is open
+if (isExtension) {
+    chrome.storage.onChanged.addListener(function (changes, area) {
+        if ((area === "session" && "tabCounts" in changes) ||
+            (area === "local" && "totalBlocked" in changes)) {
+            updateCounter();
+        }
+    });
+}
 
 // Load saved settings, then initialize the interface
 async function init() {
@@ -170,6 +202,7 @@ async function init() {
     disabledSites = saved.disabledSites;
 
     updateUI();
+    updateCounter();
 }
 
 init();
