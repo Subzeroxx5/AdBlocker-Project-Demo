@@ -23,8 +23,12 @@ let websiteDisabled =
 // Update the interface
 function updateUI() {
 
-    // Update the protection status
-    if (blockingEnabled) {
+    // Protection is active only when both
+    // global and website protection are enabled.
+    const protectionActive =
+        blockingEnabled && !websiteDisabled;
+
+    if (protectionActive) {
         statusText.textContent = "Protection is ON";
         statusText.style.color = "#4ade80";
     } else {
@@ -32,17 +36,13 @@ function updateUI() {
         statusText.style.color = "#f87171";
     }
 
-    // Update the ON/OFF switch
+    // Main switch reflects global protection
     adToggle.checked = blockingEnabled;
 
-    // Update the website button
-    if (websiteDisabled) {
-        websiteToggle.textContent =
-            "Enable on this website";
-    } else {
-        websiteToggle.textContent =
-            "Disable on this website";
-    }
+    // Website-specific button text
+    websiteToggle.textContent = websiteDisabled
+        ? "Enable on this website"
+        : "Disable on this website";
 }
 
 // Handle the ON/OFF switch
